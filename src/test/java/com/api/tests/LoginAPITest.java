@@ -4,7 +4,10 @@ import  static io.restassured.RestAssured.*;
 
 
 
+
 import static org.hamcrest.Matchers.*;
+
+import java.io.File;
 
 import org.testng.annotations.Test;
 
@@ -40,7 +43,7 @@ public class LoginAPITest {
 		.time(lessThan(1200L))
 		.body("message",equalTo("Success") )
 		.and()
-		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
+		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema"+File.separator+"LoginResponseSchema.json"));
 		
 	}
 
