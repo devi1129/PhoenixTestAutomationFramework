@@ -21,6 +21,13 @@ on:
         default: qa
         required: true
 
+      suiteXmlFile:
+        description: "TestNG Xml File"
+        type: choice
+        options: [testng.xml, smoke.xml]
+        default: testng.xml
+        required: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -37,7 +44,9 @@ jobs:
           cache: maven
 
       - name: Execute Test Automation Framework
-        run: mvn clean test -DsuiteXmlFile=testng.xml -Denv="${{ github.event.inputs.env }}"
+        run: mvn clean test \
+          -DsuiteXmlFile="${{ github.event.inputs.suiteXmlFile }}" \
+          -Denv="${{ github.event.inputs.env }}"
 
       - name: Upload Surefire Report
         if: always()
