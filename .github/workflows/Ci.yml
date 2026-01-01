@@ -1,17 +1,25 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies
-# to improve the workflow execution time.
-# For more information see:
-# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
 name: Phoenix Test Automation Framework
 
 on:
   push:
     branches:
       - master
+
   pull_request:
     branches:
       - master
+
+  schedule: # Runs at MIDNIGHT IST (12:00 AM IST = 18:30 UTC)
+    - cron: "30 18 * * *"
+
+  workflow_dispatch:
+    inputs:
+      env:
+        description: "Environment"
+        type: choice
+        options: [qa, uat, dev]
+        default: qa
+        required: true
 
 jobs:
   test:
@@ -29,7 +37,7 @@ jobs:
           cache: maven
 
       - name: Execute Test Automation Framework
-        run: mvn clean test -DsuiteXmlFile=testng.xml
+        run: mvn clean test -DsuiteXmlFile=testng.xml -Denv="${{ github.event.inputs.env }}"
 
       - name: Upload Surefire Report
         if: always()
