@@ -2,9 +2,12 @@ package com.api.tests;
 
 import static org.hamcrest.Matchers.*;
 
+
 import java.io.File;
 
 import org.testng.annotations.Test;
+
+import static com.api.utils.SpecUtil.*;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -23,16 +26,11 @@ public void masterAPITest()
 {
 
    given()
-   .baseUri(getProperty("BASE_URI"))
-   .header("Authorization",getToken(FD))
-   .contentType("")
+  .spec(requestSpecwithAuth(FD))
    .when()
    .post("master")
    .then()
-   .log()
-   .all()
-   .statusCode(200)
-   .time(lessThan(1200L))
+   .spec(responseSpec_OK())
    .body("message",equalTo("Success"))
    .body("data",notNullValue())
    // $ - root json to check if the outer json has key
@@ -48,12 +46,11 @@ public void masterAPITest()
 public void MasterAPI_InvalidTest()
 {
 given()
-   .baseUri(getProperty("BASE_URI"))
-   .contentType("")
+  .spec(requestSpec())
    .when()
    .post("master")
    .then()
-   .statusCode(401);
+ .spec(responseSpec_TEXT(401));
    
 }
 
