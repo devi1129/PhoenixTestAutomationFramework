@@ -2,9 +2,12 @@ package com.api.tests;
 
 import static org.hamcrest.Matchers.*;
 
+
 import java.io.File;
 
 import org.testng.annotations.Test;
+
+import static com.api.utils.SpecUtil.*;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -22,14 +25,11 @@ public class CountAPITest {
 	{
 		
 		given()
-		.baseUri(getProperty("BASE_URI"))
-		.and()
-		.header("Authorization",getToken(FD))
+		.spec(requestSpecwithAuth(FD))
 		.when()
 		.get("/dashboard/count")
 		.then()
-		.statusCode(200)
-		.time(lessThan(1200L))
+		.spec(responseSpec_OK())
 		.body("message",equalTo("Success"))
 		.body("data",notNullValue())
 		.body("data.size()", equalTo(3))
@@ -47,13 +47,14 @@ public class CountAPITest {
 	{
 		
 		given()
-		.baseUri(getProperty("BASE_URI"))
-		.and()
+		.spec(requestSpec())
 		.when()
 		.get("/dashboard/count")
 		.then()
-		.statusCode(401)
-        .log().all();
+		.spec(responseSpec_TEXT(401));
+
+
+		
 		
 	}
 	

@@ -6,6 +6,7 @@ import  static io.restassured.RestAssured.*;
 
 
 
+
 import static org.hamcrest.Matchers.*;
 
 import java.io.File;
@@ -13,6 +14,8 @@ import java.io.File;
 import org.testng.annotations.Test;
 
 import com.api.POJO.UserCredentials;
+import static com.api.utils.SpecUtil.*;
+
 import static com.api.utils.ConfigManager.*;
 
 import io.restassured.http.ContentType;
@@ -26,24 +29,12 @@ public class LoginAPITest {
 		
 		UserCredentials creds=new UserCredentials("iamfd", "password");
 		given()
-		.baseUri(getProperty("BASE_URI"))
+		.spec(requestSpec(creds))		
 		.and()
-		.contentType(ContentType.JSON)
-		.and()
-		.accept(ContentType.JSON)
-		.and()
-		.body(creds)
-		.log().uri()
-		.log().method()
-		.log().headers()
-		.log().body()
 		.when()
 		.post("login")
 		.then()
-		.statusCode(200)
-		.time(lessThan(1200L))
-		.body("message",equalTo("Success") )
-		.and()
+		.spec(responseSpec_OK())
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema"+File.separator+"LoginResponseSchema.json"));
 		
 	}
