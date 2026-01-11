@@ -13,7 +13,8 @@ import java.io.File;
 
 import org.testng.annotations.Test;
 
-import com.api.POJO.UserCredentials;
+import com.api.request.model.UserCredentials;
+
 import static com.api.utils.SpecUtil.*;
 
 import static com.api.utils.ConfigManager.*;

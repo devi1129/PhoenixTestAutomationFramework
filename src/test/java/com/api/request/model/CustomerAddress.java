@@ -1,4 +1,4 @@
-package com.api.POJO;
+package com.api.request.model;
 
 public record CustomerAddress(
 
