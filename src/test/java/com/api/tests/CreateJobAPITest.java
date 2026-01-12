@@ -14,6 +14,13 @@ import java.util.*;
 
 import org.testng.annotations.Test;
 
+import com.api.constant.Model;
+import com.api.constant.OEM;
+import com.api.constant.Platform;
+import com.api.constant.Problem;
+import com.api.constant.Product;
+import com.api.constant.ServiceLocation;
+import com.api.constant.Warranty_Status;
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
@@ -42,14 +49,14 @@ public class CreateJobAPITest {
 				"Kakinada", "533006", "India", "Andhra Pradesh");
 
 		CustomerProduct customerProduct = new CustomerProduct(getTimewithDaysAgo(10), "12345678998761",
-				"83601225372851", "83601225372851", getTimewithDaysAgo(10), 1, 1);
+				"99601225372851", "99601225372851", getTimewithDaysAgo(10), Product.NEXUS_2.getCode(), Model.NEXUS_2_BLUE.getCode());
 
-		Problems problem = new Problems(6, "over heat");
+		Problems problem = new Problems(Problem.OVERHEATING.getCode(), "over heat");
 		
 		List<Problems> problems=new ArrayList();
 		
 		problems.add(problem);
-		CreateJobPayload createJobPayload = new CreateJobPayload(1, 2, 1, 1, customer, CustomerAddress, customerProduct,
+		CreateJobPayload createJobPayload = new CreateJobPayload(ServiceLocation.SERVICE_LOCATION_A.getCode(), Platform.FRONT_DESK.getCode(), Warranty_Status.IN_WARRANTY.getCode(), OEM.GOOGLE.getCode(), customer, CustomerAddress, customerProduct,
 				problems);
 		
 		given()
