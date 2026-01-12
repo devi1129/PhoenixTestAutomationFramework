@@ -2,12 +2,15 @@ package com.api.tests;
 
 import static com.api.constant.Roles.FD;
 
+
 import static com.api.utils.SpecUtil.*;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 import java.io.File;
+
 import java.util.*;
+
 
 import org.testng.annotations.Test;
 
@@ -16,6 +19,7 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
+import static com.api.utils.DateTimeUtil.*;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
 
@@ -29,14 +33,16 @@ public class CreateJobAPITest {
 		// createjob payload
 		
 		
+		
+		
 		Customer customer = new Customer("Devi", "Pothabatthula", "9390007654", "", "devi2728@yopmail.com", "");
 
 		System.out.println(customer.email_id());
 		CustomerAddress CustomerAddress = new CustomerAddress("1-18", "Swamy nagar", "1st Street", "Indrapalem",
 				"Kakinada", "533006", "India", "Andhra Pradesh");
 
-		CustomerProduct customerProduct = new CustomerProduct("2025-09-30T18:30:00.000Z", "12345678998761",
-				"53601225372851", "53601225372851", "2025-09-30T18:30:00.000Z", 1, 1);
+		CustomerProduct customerProduct = new CustomerProduct(getTimewithDaysAgo(10), "12345678998761",
+				"83601225372851", "83601225372851", getTimewithDaysAgo(10), 1, 1);
 
 		Problems problem = new Problems(6, "over heat");
 		
