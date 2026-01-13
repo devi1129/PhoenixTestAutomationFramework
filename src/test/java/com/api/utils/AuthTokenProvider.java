@@ -7,8 +7,8 @@ import static org.hamcrest.Matchers.lessThan;
 
 import java.io.File;
 
-import com.api.POJO.UserCredentials;
 import com.api.constant.Roles;
+import com.api.request.model.UserCredentials;
 
 import static com.api.constant.Roles.*;
 

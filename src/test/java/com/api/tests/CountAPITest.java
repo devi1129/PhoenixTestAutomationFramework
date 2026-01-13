@@ -1,26 +1,28 @@
 package com.api.tests;
 
-import static org.hamcrest.Matchers.*;
-
+import static com.api.constant.Roles.FD;
+import static com.api.utils.SpecUtil.requestSpec;
+import static com.api.utils.SpecUtil.requestSpecwithAuth;
+import static com.api.utils.SpecUtil.responseSpec_OK;
+import static com.api.utils.SpecUtil.responseSpec_TEXT;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.blankOrNullString;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.everyItem;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 
 import java.io.File;
 
 import org.testng.annotations.Test;
 
-import static com.api.utils.SpecUtil.*;
-
 import io.restassured.module.jsv.JsonSchemaValidator;
-
-import  static com.api.constant.Roles.*;
-import static com.api.utils.AuthTokenProvider.*;
-
-import static com.api.utils.ConfigManager.*;
-
-import  static io.restassured.RestAssured.*;
 public class CountAPITest {
 
 	
-	@Test
+	@Test(description ="Verify if count API is giving correct response",groups= {"api","regression","smoke"} )
 	public void verifyCountAPIResponse()
 	{
 		
@@ -42,7 +44,7 @@ public class CountAPITest {
 	}
 	
 	
-	@Test
+	@Test(description ="Verify if count API is giving correct status code for Invalid Token",groups= {"api","regression","smoke"} )
 	public void verifyCountAPI_MissingAuthToken()
 	{
 		
