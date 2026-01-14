@@ -9,8 +9,8 @@ on:
     branches:
       - master
 
-  schedule: # Runs at MIDNIGHT IST (12:00 AM IST = 18:30 UTC)
-    - cron: "30 18 * * *"
+  # schedule: # Runs at MIDNIGHT IST (12:00 AM IST = 18:30 UTC)
+  #   - cron: "30 18 * * *"
 
   workflow_dispatch:
     inputs:
@@ -48,15 +48,21 @@ jobs:
           distribution: temurin
           cache: maven
 
+      - name: Set default values for execution
+        id: defaults
+        run: |
+          echo "suiteXmlFile=${{ github.event.inputs.suiteXmlFile || 'testng.xml' }}" >> $GITHUB_OUTPUT
+          echo "env=${{ github.event.inputs.env || 'qa' }}" >> $GITHUB_OUTPUT
+
       - name: Execute Test Automation Framework
         run: |
           mvn clean test \
-            -DsuiteXmlFile="${{ github.event.inputs.suiteXmlFile || 'testng.xml' }}" \
-            -Denv="${{ github.event.inputs.env || 'qa' }}"
+            -DsuiteXmlFile="${{ steps.defaults.outputs.suiteXmlFile }}" \
+            -Denv="${{ steps.defaults.outputs.env }}"
 
       - name: Upload Surefire Report
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: surefire-reports
           path: target/surefire-reports/
