@@ -19,7 +19,7 @@ public class CSVReaderUtil {
 	}
 	
 	
-	public static Iterator<UserBean> loadCSV(String path){
+	public static <T> Iterator<T> loadCSV(String path,Class<T> bean){
 		
 		
 		
@@ -33,11 +33,11 @@ public class CSVReaderUtil {
 		
 
 		
-		CsvToBean<UserBean> creds=new CsvToBeanBuilder(csv).withType(UserBean.class)
+		CsvToBean<T> creds=new CsvToBeanBuilder(csv).withType(bean)
 				                   .withIgnoreEmptyLine(true)
 				                   .build();
 		
-		List<UserBean> list = creds.parse();
+		List<T> list = creds.parse();
 		
 		System.out.println(list.toString());
 		
