@@ -1,4 +1,4 @@
-package com.api.tests.datadriven;
+package com.api.tests;
 
 import static com.api.constant.Roles.FD;
 import static com.api.utils.DateTimeUtil.getTimewithDaysAgo;
@@ -28,14 +28,22 @@ import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
+import com.api.utils.FakerDataGenerator;
 
-public class CreateJobAPIDatadrivenTest {
+public class CreateJobAPIFakeDataTest {
 	
+	 private CreateJobPayload createJobPayload;
 	
+	@BeforeMethod(description = "Creating createjob api request payload")
+	public void setup()
+	{
+		
+		createJobPayload=FakerDataGenerator.generateFakeCreateJobData();
+		
+	}
 	
-	
-	@Test(description ="Verify if CreateJob API is able to create Inwarranty job",groups= {"api","regression","smoke","csv"},dataProviderClass = com.dataproviders.DataProviderUtils.class,dataProvider = "CreateJobAPIDataProvider" )
-	public void createJobAPITest(CreateJobPayload payload)
+	@Test(description ="Verify if CreateJob API is able to create Inwarranty job",groups= {"api","regression","smoke"} )
+	public void createJobAPITest()
 	{
 		
 		
@@ -47,7 +55,7 @@ public class CreateJobAPIDatadrivenTest {
 		
 		
 		given()
-		.spec(requestSpecwithAuth(FD,payload))
+		.spec(requestSpecwithAuth(FD,createJobPayload))
 		.when()
 		.post("/job/create")
 		.then()
