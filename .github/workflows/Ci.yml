@@ -30,6 +30,7 @@ on:
         options:
           - testng.xml
           - smoke.xml
+          - testng-data-driven.xml
         default: testng.xml
         required: true
 
