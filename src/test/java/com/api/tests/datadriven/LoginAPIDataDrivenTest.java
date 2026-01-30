@@ -17,7 +17,7 @@ public class LoginAPIDataDrivenTest {
 	
 private	UserCredentials creds;
 	
-	@Test(description = "Verifying if login api is working for user iamfd" , groups = {"api","regression","smoke","csv"},
+	@Test(description = "Verifying if login api is working for user iamfd" , groups = {"api","regression","smoke","csv","datadriven"},
 			dataProviderClass =com.dataproviders.DataProviderUtils.class 
 			,dataProvider = "loginAPIDataProvider")
 	public void loginAPITest(UserBean bean)
