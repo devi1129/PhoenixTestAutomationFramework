@@ -20,7 +20,7 @@ private	UserCredentials creds;
 	@Test(description = "Verifying if login api is working for user iamfd" , groups = {"api","regression","smoke","csv"},
 			dataProviderClass =com.dataproviders.DataProviderUtils.class 
 			,dataProvider = "loginAPIExcelDataProvider")
-	public void loginAPITest(UserCredentials userCredentials)
+	public void loginAPITest(UserBean userCredentials)
 	{
 		
 		
