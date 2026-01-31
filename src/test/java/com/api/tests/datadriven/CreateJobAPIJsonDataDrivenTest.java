@@ -29,23 +29,14 @@ import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 
-public class CreateJobAPIExcelDatadrivenTest {
+public class CreateJobAPIJsonDataDrivenTest {
 	
 	
 	
 	
-	@Test(description ="Verify if CreateJob API is able to create Inwarranty job",groups= {"api","regression","smoke","csv","datadriven"},dataProviderClass = com.dataproviders.DataProviderUtils.class,dataProvider = "CreateJobAPIExcelDataProvider" )
+	@Test(description ="Verify if CreateJob API is able to create Inwarranty job",groups= {"api","regression","smoke","csv"},dataProviderClass = com.dataproviders.DataProviderUtils.class,dataProvider = "CreateJobAPIJsonDataProvider" )
 	public void createJobAPITest(CreateJobPayload payload)
 	{
-		
-		
-		// createjob payload
-		
-		
-		
-		
-		
-		
 		given()
 		.spec(requestSpecwithAuth(FD,payload))
 		.when()
