@@ -29,7 +29,7 @@ import com.api.request.model.CustomerAddress;
 import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 
-public class CreateJobAPIJsonDatadrivenTest {
+public class CreateJobAPIJsonDataDrivenTest {
 	
 	
 	
